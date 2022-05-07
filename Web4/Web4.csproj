@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<WarningsAsErrors>nullable</WarningsAsErrors>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<AdditionalFiles Include="..\stylecop.json" Link="stylecop.json" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <PackageReference Include="System.Text.Encoding.CodePages" Version="6.0.0" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <ProjectReference Include="..\Web4.Core\Web4.Core.csproj" />
+	  <ProjectReference Include="..\Web4.Index\Web4.Index.csproj" />
+	</ItemGroup>
+</Project>

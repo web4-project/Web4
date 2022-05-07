@@ -1,0 +1,24 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 2.0//EN">
+<html>
+<head>
+    <title>Web4</title>
+</head>
+<body>
+    <center><h1><b>Web4</b></h1></center>
+    <hr>
+    {{#each this}}
+    <h3>{{Key}}</h3>
+    <ul>
+        {{#each this}}
+        <li>{{Name}}
+            <ul>
+                {{#Pages}}
+                <li><a href="{{{../Route}}}{{{./Route}}}">{{PageName}}</a></li>
+                {{/Pages}}
+            </ul>
+        </li>
+        {{/each}}
+    </ul>
+    {{/each}}
+</body>
+</html>
