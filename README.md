@@ -4,4 +4,4 @@
 
 [Web4 Mission Statement](https://github.com/web4-project/)
 
-Web4 is a Web Server and Proxy that translates new web services into ones that older computers can handle. All dev work is currently happening in our dev branch. Once we have something we feel is stable enough for "normal" people to run, it will move to main.
+## **Dev info coming soon!**
