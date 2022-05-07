@@ -34,7 +34,7 @@ foreach (var site in SiteSetup.Sites)
         }
 
         // Index of the feature page.
-        else if (site.Route != "/" && page.Route == "")
+        else if (site.Route != "/" && page.Route == string.Empty)
         {
             endpointName = site.Route;
         }
