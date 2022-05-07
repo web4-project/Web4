@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web4.Index", "Web4.Index\We
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web4.Handlebars", "Web4.Handlebars\Web4.Handlebars.csproj", "{F06E5064-263B-4F0D-8E61-00DB2D17634D}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web4.Examples", "Web4.Examples\Web4.Examples.csproj", "{95EA644B-35BF-419D-A40E-E373CFBA7358}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{F06E5064-263B-4F0D-8E61-00DB2D17634D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F06E5064-263B-4F0D-8E61-00DB2D17634D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F06E5064-263B-4F0D-8E61-00DB2D17634D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95EA644B-35BF-419D-A40E-E373CFBA7358}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95EA644B-35BF-419D-A40E-E373CFBA7358}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95EA644B-35BF-419D-A40E-E373CFBA7358}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95EA644B-35BF-419D-A40E-E373CFBA7358}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -13,9 +13,9 @@ Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
 var builder = WebApplication.CreateBuilder(args);
 
-var sites = new List<ISite>();
+SiteSetup.Sites.Add(new ExampleSite());
 
-SiteSetup.Sites.Add(new IndexSite(sites));
+SiteSetup.Sites.Add(new IndexSite(SiteSetup.Sites.ToList()));
 
 builder.WebHost.UseUrls("http://*:5000");
 
