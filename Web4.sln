@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9F103083
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web4.ImageMagick.Tests", "Tests\Web4.ImageMagick.Tests\Web4.ImageMagick.Tests.csproj", "{746DAF34-1931-45A3-B22F-37A6CDA45150}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web4.ImageSharp", "Web4.ImageSharp\Web4.ImageSharp.csproj", "{F94E5EC1-CA7D-4F76-8A7E-93BF470B1AA6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{746DAF34-1931-45A3-B22F-37A6CDA45150}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{746DAF34-1931-45A3-B22F-37A6CDA45150}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{746DAF34-1931-45A3-B22F-37A6CDA45150}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F94E5EC1-CA7D-4F76-8A7E-93BF470B1AA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F94E5EC1-CA7D-4F76-8A7E-93BF470B1AA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F94E5EC1-CA7D-4F76-8A7E-93BF470B1AA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F94E5EC1-CA7D-4F76-8A7E-93BF470B1AA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

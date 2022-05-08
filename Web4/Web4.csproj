@@ -17,6 +17,7 @@
 	  <ProjectReference Include="..\Web4.Core\Web4.Core.csproj" />
 	  <ProjectReference Include="..\Web4.Examples\Web4.Examples.csproj" />
 	  <ProjectReference Include="..\Web4.ImageMagick\Web4.ImageMagick.csproj" />
+	  <ProjectReference Include="..\Web4.ImageSharp\Web4.ImageSharp.csproj" />
 	  <ProjectReference Include="..\Web4.Index\Web4.Index.csproj" />
 	</ItemGroup>
 </Project>

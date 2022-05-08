@@ -6,6 +6,7 @@ using System.Text;
 using Web4;
 using Web4.Core;
 using Web4.ImageMagick;
+using Web4.ImageSharp;
 using Web4.Index;
 
 // In order for encodings to work when writing out HTML for some providers
@@ -24,7 +25,17 @@ var app = builder.Build();
 
 HttpFileClient client = new HttpFileClient();
 
-IImageProxyHandler imageProxy = new ImageMagickProxyHandler(client);
+IImageProxyHandler imageProxy;
+
+// Magick.NET does not have an M1 port yet, so use ImageSharp instead.
+if (System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.OSX))
+{
+    imageProxy = new ImageSharpProxyHandler(client);
+}
+else
+{
+    imageProxy = new ImageMagickProxyHandler(client);
+}
 
 app.MapGet("/proxy/image/{*remander}", imageProxy.InvokeImageProxy);
 
