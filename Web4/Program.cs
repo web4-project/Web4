@@ -18,7 +18,7 @@ SiteSetup.Sites.Add(new ExampleSite());
 
 SiteSetup.Sites.Add(new IndexSite(SiteSetup.Sites.ToList()));
 
-builder.WebHost.UseUrls("http://*:5000");
+builder.WebHost.UseUrls("http://*:5001");
 
 var app = builder.Build();
 
@@ -65,4 +65,4 @@ foreach (var site in SiteSetup.Sites)
 }
 
 // TODO: Allow for other ports.
-app.Run("http://*:5000");
+app.Run("http://*:5001");
