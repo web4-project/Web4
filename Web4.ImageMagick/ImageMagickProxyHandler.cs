@@ -26,7 +26,7 @@ namespace Web4.ImageMagick
             Directory.CreateDirectory(this.cachePath);
         }
 
-        public string DefaultDownloadPath => this.DefaultDownloadPath;
+        public string DefaultDownloadPath => this.httpClient.DefaultDownloadPath;
 
         public string DefaultCachePath => this.cachePath;
 

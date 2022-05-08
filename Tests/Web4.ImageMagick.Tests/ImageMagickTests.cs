@@ -31,13 +31,13 @@ public class ImageMagickTests
     {
         if (Directory.Exists(this.proxyHandler.DefaultDownloadPath))
         {
-            Directory.Delete(this.proxyHandler.DefaultDownloadPath);
+            Directory.Delete(this.proxyHandler.DefaultDownloadPath, true);
             Directory.CreateDirectory(this.proxyHandler.DefaultDownloadPath);
         }
 
         if (Directory.Exists(this.proxyHandler.DefaultCachePath))
         {
-            Directory.Delete(this.proxyHandler.DefaultCachePath);
+            Directory.Delete(this.proxyHandler.DefaultCachePath, true);
             Directory.CreateDirectory(this.proxyHandler.DefaultCachePath);
         }
 

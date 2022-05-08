@@ -22,7 +22,7 @@ namespace Web4.Core
             this.logger = logger ?? default;
             var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty;
             this.defaultDownloadPath = Path.Combine(path, defaultDownloadPath ?? "Downloads");
-            Directory.CreateDirectory(this.DefaultDownloadPath);
+            Directory.CreateDirectory(this.defaultDownloadPath);
         }
 
         /// <inheritdoc/>
