@@ -64,17 +64,17 @@ namespace Web4.Core
         {
             var imageTranscodeOptions = new ImageTranscodeOptions();
 
-            Enum.TryParse(typeof(ImageFormat), query["format"], out var imageFormat);
+            Enum.TryParse(typeof(ImageFormat), query.GetValueOrDefault("format"), out var imageFormat);
             if (imageFormat is ImageFormat format)
             {
                 imageTranscodeOptions.Format = format;
             }
 
-            int.TryParse(query["width"], out var width);
-            int.TryParse(query["height"], out var height);
-            int.TryParse(query["scaledownby"], out var scaledownby);
-            int.TryParse(query["framespersecond"], out var framespersecond);
-            bool.TryParse(query["usecache"], out var usecache);
+            int.TryParse(query.GetValueOrDefault("width"), out var width);
+            int.TryParse(query.GetValueOrDefault("height"), out var height);
+            int.TryParse(query.GetValueOrDefault("scaledownby"), out var scaledownby);
+            int.TryParse(query.GetValueOrDefault("framespersecond"), out var framespersecond);
+            bool.TryParse(query.GetValueOrDefault("usecache"), out var usecache);
 
             imageTranscodeOptions.UseCache = usecache;
             imageTranscodeOptions.Width = width;

@@ -5,6 +5,7 @@
 using System.Text;
 using Web4;
 using Web4.Core;
+using Web4.ImageMagick;
 using Web4.Index;
 
 // In order for encodings to work when writing out HTML for some providers
@@ -20,6 +21,12 @@ SiteSetup.Sites.Add(new IndexSite(SiteSetup.Sites.ToList()));
 builder.WebHost.UseUrls("http://*:5000");
 
 var app = builder.Build();
+
+HttpFileClient client = new HttpFileClient();
+
+IImageProxyHandler imageProxy = new ImageMagickProxyHandler(client);
+
+app.MapGet("/proxy/image/{*remander}", imageProxy.InvokeImageProxy);
 
 foreach (var site in SiteSetup.Sites)
 {
