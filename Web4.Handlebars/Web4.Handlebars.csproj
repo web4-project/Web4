@@ -2,10 +2,6 @@
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
-	</PropertyGroup>
-	
-	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
 		<WarningsAsErrors>nullable</WarningsAsErrors>
 	</PropertyGroup>
 
@@ -21,4 +17,5 @@
 	<ItemGroup>
 		<AdditionalFiles Include="..\stylecop.json" Link="stylecop.json" />
 	</ItemGroup>
+	
 </Project>
