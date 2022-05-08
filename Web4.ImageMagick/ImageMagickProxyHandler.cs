@@ -62,32 +62,9 @@ namespace Web4.ImageMagick
         /// <inheritdoc/>
         public async Task<FileResult> TranscodeImageAsync(Uri uri, ImageTranscodeOptions options, CancellationToken? cancellationToken = null)
         {
-            string filepath = string.Empty;
+            var result = await Helpers.GenerateFilePath(this.httpClient, uri, options, options.Format.ToString(), options.UseCache, this.cachePath, null);
 
-            // Generate the filename key based on the URI.
-            string key = uri.ToString().GenerateKey() ?? string.Empty;
-            string optionsKey = options.GenerateKey() ?? string.Empty;
-            var generatedFileName = $"{key}-{optionsKey}.{options.Format}";
-
-            // If file is remote and doesn't exist in the cache, download it.
-            if (!uri.IsFile)
-            {
-                filepath = await this.httpClient.DownloadFile(uri, filename: key, useCache: options.UseCache);
-            }
-            else
-            {
-                filepath = uri.AbsolutePath;
-            }
-
-            if (!File.Exists(filepath))
-            {
-                throw new ArgumentNullException($"File does not exist: Filepath {filepath}, Uri: {uri}");
-            }
-
-            var md5 = Helpers.GenerateKey(filepath);
-            var generatedFilePath = Path.Combine(this.cachePath, generatedFileName);
-
-            using var image = new MagickImage(filepath);
+            using var image = new MagickImage(result.FilePath);
 
             if ((options.Width > 0 && options.Width <= image.Width) || (options.Height > 0 && options.Height <= image.Height))
             {
@@ -114,9 +91,10 @@ namespace Web4.ImageMagick
                     break;
             }
 
-            image.Write(generatedFilePath);
+            image.Write(result.GeneratedFilePath);
 
-            return new FileResult(generatedFilePath, md5);
+            var md5 = Helpers.GenerateKey(result.GeneratedFilePath) ?? string.Empty;
+            return new FileResult(result.GeneratedFilePath, md5);
         }
     }
 }

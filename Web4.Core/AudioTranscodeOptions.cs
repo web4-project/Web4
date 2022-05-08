@@ -2,6 +2,8 @@
 // Copyright (c) Web4 Team. All rights reserved.
 // </copyright>
 
+using Microsoft.AspNetCore.Http;
+
 namespace Web4.Core
 {
     /// <summary>
@@ -39,6 +41,12 @@ namespace Web4.Core
             }
 
             return $"acodec={this.ACodec}&samplerate={this.SampleRate}&abitrate={this.ABitrate}&usecache={this.UseCache}";
+        }
+
+        public static AudioTranscodeOptions FromQueryString(IQueryCollection queryCollection)
+        {
+            var parameters = queryCollection.Keys.Cast<string>().ToDictionary(k => k, v => queryCollection[v].ToString());
+            return AudioTranscodeOptions.FromQueryString(parameters);
         }
 
         public static AudioTranscodeOptions FromQueryString(Dictionary<string, string> query)

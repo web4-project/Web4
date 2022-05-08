@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<WarningsAsErrors>nullable</WarningsAsErrors>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Xabe.FFmpeg" Version="5.1.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Web4.Core\Web4.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<AdditionalFiles Include="..\stylecop.json" Link="stylecop.json" />
+	</ItemGroup>
+	
+</Project>

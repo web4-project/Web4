@@ -8,6 +8,7 @@ using Web4.Core;
 using Web4.ImageMagick;
 using Web4.ImageSharp;
 using Web4.Index;
+using Web4.FFMpeg;
 
 // In order for encodings to work when writing out HTML for some providers
 // Like Shift-JIS, we need to register the encoding handler.
@@ -37,7 +38,15 @@ else
     imageProxy = new ImageMagickProxyHandler(client);
 }
 
+IAudioProxyHandler audioProxy = new FFMpegAudioProxyHandler(client);
+
+IVideoProxyHandler videoProxy = new FFMpegVideoProxyHandler(client);
+
 app.MapGet("/proxy/image/{*remander}", imageProxy.InvokeImageProxy);
+
+app.MapGet("/proxy/audio/{*remander}", audioProxy.InvokeAudioProxy);
+
+app.MapGet("/proxy/video/{*remander}", videoProxy.InvokeVideoProxy);
 
 foreach (var site in SiteSetup.Sites)
 {

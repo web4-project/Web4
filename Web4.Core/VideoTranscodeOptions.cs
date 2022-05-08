@@ -2,6 +2,8 @@
 // Copyright (c) Web4 Team. All rights reserved.
 // </copyright>
 
+using Microsoft.AspNetCore.Http;
+
 namespace Web4.Core
 {
     /// <summary>
@@ -95,6 +97,12 @@ namespace Web4.Core
             }
 
             return $"format={this.Format}&vcodec={this.VCodec}&acodec={this.ACodec}&videoquality={this.VideoQuality}&samplerate={this.SampleRate}&abitrate={this.ABitrate}&vbitrate={this.VBitrate}&width={this.Width}&height={this.Height}&scaledownby={this.ScaleDownBy}&framespersecond={this.FramesPerSecond}&usecache={this.UseCache}";
+        }
+
+        public static VideoTranscodeOptions FromQueryString(IQueryCollection queryCollection)
+        {
+            var parameters = queryCollection.Keys.Cast<string>().ToDictionary(k => k, v => queryCollection[v].ToString());
+            return VideoTranscodeOptions.FromQueryString(parameters);
         }
 
         public static VideoTranscodeOptions FromQueryString(Dictionary<string, string> query)

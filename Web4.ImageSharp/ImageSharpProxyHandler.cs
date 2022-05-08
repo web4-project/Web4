@@ -69,34 +69,11 @@ namespace Web4.ImageSharp
         /// <inheritdoc/>
         public async Task<FileResult> TranscodeImageAsync(Uri uri, ImageTranscodeOptions options, CancellationToken? cancellationToken = null)
         {
-            string filepath = string.Empty;
+            var result = await Helpers.GenerateFilePath(this.httpClient, uri, options, options.Format.ToString(), options.UseCache, this.cachePath, null);
 
-            // Generate the filename key based on the URI.
-            string key = uri.ToString().GenerateKey() ?? string.Empty;
-            string optionsKey = options.GenerateKey() ?? string.Empty;
-            var generatedFileName = $"{key}-{optionsKey}.{options.Format}";
-
-            // If file is remote and doesn't exist in the cache, download it.
-            if (!uri.IsFile)
-            {
-                filepath = await this.httpClient.DownloadFile(uri, filename: key, useCache: options.UseCache);
-            }
-            else
-            {
-                filepath = uri.AbsolutePath;
-            }
-
-            if (!File.Exists(filepath))
-            {
-                throw new ArgumentNullException($"File does not exist: Filepath {filepath}, Uri: {uri}");
-            }
-
-            var md5 = Helpers.GenerateKey(filepath);
-            var generatedFilePath = Path.Combine(this.cachePath, generatedFileName);
-
-            using var contentStream = File.OpenRead(filepath);
+            using var contentStream = File.OpenRead(result.FilePath);
             using var transcodeImage = await Image.LoadAsync(this.imageConfig, contentStream);
-            using var fileStream = new FileStream(generatedFilePath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            using var fileStream = new FileStream(result.GeneratedFilePath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
             if ((options.Width > 0 && options.Width <= transcodeImage.Width) || (options.Height > 0 && options.Height <= transcodeImage.Height))
             {
                 transcodeImage.Mutate(x => x.Resize(options.Width, options.Height));
@@ -122,7 +99,8 @@ namespace Web4.ImageSharp
                     break;
             }
 
-            return new FileResult(generatedFilePath, md5);
+            var md5 = Helpers.GenerateKey(result.GeneratedFilePath) ?? string.Empty;
+            return new FileResult(result.GeneratedFilePath, md5);
         }
     }
 }

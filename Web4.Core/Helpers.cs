@@ -50,6 +50,35 @@ namespace Web4.Core
             }
         }
 
+        public static async Task<FilePathResult> GenerateFilePath(IHttpFileClient httpClient, Uri uri, object options, string extension, bool useCache, string cachePath, string? downloadPath = default)
+        {
+            string filepath = string.Empty;
+
+            // Generate the filename key based on the URI.
+            string key = uri.ToString().GenerateKey() ?? string.Empty;
+            string optionsKey = options.GenerateKey() ?? string.Empty;
+            var generatedFileName = $"{key}-{optionsKey}.{extension}";
+
+            // If file is remote and doesn't exist in the cache, download it.
+            if (!uri.IsFile)
+            {
+                filepath = await httpClient.DownloadFile(uri, filename: key, useCache: useCache, downloadPath: downloadPath);
+            }
+            else
+            {
+                filepath = uri.AbsolutePath;
+            }
+
+            if (!File.Exists(filepath))
+            {
+                throw new ArgumentNullException($"File does not exist: Filepath {filepath}, Uri: {uri}");
+            }
+
+            var md5 = Helpers.GenerateKey(filepath) ?? string.Empty;
+            var generatedFilePath = Path.Combine(cachePath, generatedFileName);
+            return new FilePathResult(filepath, generatedFilePath, generatedFileName, md5);
+        }
+
         public static string? GenerateKey(string filename)
         {
             using var md5Instance = MD5.Create();
@@ -68,6 +97,44 @@ namespace Web4.Core
             }
 
             return hash.Replace("-", string.Empty).ToLowerInvariant();
+        }
+
+        public static string GenerateAudioExtension(this AudioCodec codec)
+        {
+            switch (codec)
+            {
+                case AudioCodec.Unknown:
+                    return "unknown";
+                case AudioCodec.pcm_u8:
+                    return "pcm";
+                case AudioCodec.real_144:
+                    return "ra";
+                case AudioCodec.adpcm_ms:
+                    return "pcm";
+                case AudioCodec.wmav1:
+                    return "asf";
+                default:
+                    return "unknown";
+            }
+        }
+
+        public static string GenerateVideoExtension(this VideoFormat codec)
+        {
+            switch (codec)
+            {
+                case VideoFormat.None:
+                    return "unknown";
+                case VideoFormat.rm:
+                    return "rm";
+                case VideoFormat.asf:
+                    return "wmv";
+                case VideoFormat.mov:
+                    return "mov";
+                case VideoFormat.avi:
+                    return "avi";
+                default:
+                    return "unknown";
+            }
         }
 
         private static string? ComputeHash(byte[]? objectAsBytes)
