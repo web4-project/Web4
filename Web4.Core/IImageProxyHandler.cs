@@ -35,5 +35,9 @@ namespace Web4.Core
         /// <param name="cancellationToken"><see cref="CancellationToken"/>.</param>
         /// <returns>String Path location to the image.</returns>
         Task<string> TranscodeImageAsync(Uri uri, ImageTranscodeOptions options, CancellationToken? cancellationToken = default);
+
+        string DefaultDownloadPath { get; }
+
+        string DefaultCachePath { get; }
     }
 }

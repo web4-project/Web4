@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
@@ -26,6 +26,12 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\Web4.Core\Web4.Core.csproj" />
 		<ProjectReference Include="..\..\Web4.ImageMagick\Web4.ImageMagick.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="TestImages\test.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 
 </Project>

@@ -17,12 +17,18 @@ namespace Web4.ImageMagick
         private ImageTranscodeOptions defaultOptions;
         private string cachePath;
 
-        public ImageMagickProxyHandler(HttpFileClient? httpClient = default, ImageTranscodeOptions? defaultOptions = null)
+        public ImageMagickProxyHandler(HttpFileClient? httpClient = default, ImageTranscodeOptions? defaultOptions = null, string? defaultDownloadPath = default)
         {
-            this.httpClient = httpClient ?? new HttpFileClient(defaultDownloadPath: "Images");
+            var downloadPath = defaultDownloadPath ?? "Images";
+            this.httpClient = httpClient ?? new HttpFileClient(defaultDownloadPath: downloadPath);
             this.defaultOptions = defaultOptions ?? new ImageTranscodeOptions();
             this.cachePath = Path.Combine(this.httpClient.DefaultDownloadPath, "Cache");
+            Directory.CreateDirectory(this.cachePath);
         }
+
+        public string DefaultDownloadPath => this.DefaultDownloadPath;
+
+        public string DefaultCachePath => this.cachePath;
 
         /// <inheritdoc/>
         public async Task InvokeImageProxy(HttpContext context)
@@ -60,6 +66,10 @@ namespace Web4.ImageMagick
             if (!uri.IsFile)
             {
                 filepath = await this.httpClient.DownloadFile(uri);
+            }
+            else
+            {
+                filepath = uri.AbsolutePath;
             }
 
             if (!File.Exists(filepath))

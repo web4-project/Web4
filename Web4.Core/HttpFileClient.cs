@@ -20,8 +20,9 @@ namespace Web4.Core
         {
             this.httpClient = client ?? new HttpClient();
             this.logger = logger ?? default;
-            var path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty);
+            var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty;
             this.defaultDownloadPath = Path.Combine(path, defaultDownloadPath ?? "Downloads");
+            Directory.CreateDirectory(this.DefaultDownloadPath);
         }
 
         /// <inheritdoc/>
