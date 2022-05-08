@@ -26,8 +26,10 @@ namespace Web4.ImageMagick
             Directory.CreateDirectory(this.cachePath);
         }
 
+        /// <inheritdoc/>
         public string DefaultDownloadPath => this.httpClient.DefaultDownloadPath;
 
+        /// <inheritdoc/>
         public string DefaultCachePath => this.cachePath;
 
         /// <inheritdoc/>
@@ -44,7 +46,7 @@ namespace Web4.ImageMagick
 
                 var imageTranscodeOptions = ImageTranscodeOptions.FromQueryString(query);
                 var resultLocation = await this.TranscodeImageAsync(path, imageTranscodeOptions);
-                var bvtes = File.ReadAllBytes(resultLocation);
+                var bvtes = File.ReadAllBytes(resultLocation.FilePath);
                 await context.Response.Body.WriteAsync(bvtes, 0, bvtes.Length);
             }
             catch (Exception)
@@ -54,18 +56,23 @@ namespace Web4.ImageMagick
         }
 
         /// <inheritdoc/>
-        public Task<string> TranscodeImageAsync(string filepath, ImageTranscodeOptions options, CancellationToken? cancellationToken = null)
+        public Task<FileResult> TranscodeImageAsync(string filepath, ImageTranscodeOptions options, CancellationToken? cancellationToken = null)
             => this.TranscodeImageAsync(new Uri(filepath), options, cancellationToken);
 
         /// <inheritdoc/>
-        public async Task<string> TranscodeImageAsync(Uri uri, ImageTranscodeOptions options, CancellationToken? cancellationToken = null)
+        public async Task<FileResult> TranscodeImageAsync(Uri uri, ImageTranscodeOptions options, CancellationToken? cancellationToken = null)
         {
             string filepath = string.Empty;
+
+            // Generate the filename key based on the URI.
+            string key = uri.ToString().GenerateKey() ?? string.Empty;
+            string optionsKey = options.GenerateKey() ?? string.Empty;
+            var generatedFileName = $"{key}-{optionsKey}.{options.Format}";
 
             // If file is remote and doesn't exist in the cache, download it.
             if (!uri.IsFile)
             {
-                filepath = await this.httpClient.DownloadFile(uri);
+                filepath = await this.httpClient.DownloadFile(uri, filename: key, useCache: options.UseCache);
             }
             else
             {
@@ -77,8 +84,7 @@ namespace Web4.ImageMagick
                 throw new ArgumentNullException($"File does not exist: Filepath {filepath}, Uri: {uri}");
             }
 
-            var generatedFileName = $"{Helpers.GenerateKey(filepath)}-{options.GenerateKey()}.{options.Format}";
-
+            var md5 = Helpers.GenerateKey(filepath);
             var generatedFilePath = Path.Combine(this.cachePath, generatedFileName);
 
             using var image = new MagickImage(filepath);
@@ -110,7 +116,7 @@ namespace Web4.ImageMagick
 
             image.Write(generatedFilePath);
 
-            return generatedFilePath;
+            return new FileResult(generatedFilePath, md5);
         }
     }
 }

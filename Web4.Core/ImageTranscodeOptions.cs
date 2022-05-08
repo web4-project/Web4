@@ -37,6 +37,12 @@ namespace Web4.Core
         /// </summary>
         public int FramesPerSecond { get; set; } = 0;
 
+        /// <summary>
+        /// Gets or sets a value indicating whether to use the file cache.
+        /// Defaults to true.
+        /// </summary>
+        public bool UseCache { get; set; } = true;
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -68,7 +74,9 @@ namespace Web4.Core
             int.TryParse(query["height"], out var height);
             int.TryParse(query["scaledownby"], out var scaledownby);
             int.TryParse(query["framespersecond"], out var framespersecond);
+            bool.TryParse(query["usecache"], out var usecache);
 
+            imageTranscodeOptions.UseCache = usecache;
             imageTranscodeOptions.Width = width;
             imageTranscodeOptions.Height = height;
             imageTranscodeOptions.ScaleDownBy = scaledownby;

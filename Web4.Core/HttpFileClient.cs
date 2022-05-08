@@ -29,14 +29,21 @@ namespace Web4.Core
         public string DefaultDownloadPath => this.defaultDownloadPath;
 
         /// <inheritdoc/>
-        public async Task<string> DownloadFile(Uri uri, string? downloadPath = default, string? filename = default)
+        public async Task<string> DownloadFile(Uri uri, string? downloadPath = default, string? filename = default, bool useCache = true)
         {
             ArgumentNullException.ThrowIfNull(uri, nameof(uri));
             this.logger?.LogInformation($"Downloading File from {uri}.");
 
             downloadPath = downloadPath ?? this.defaultDownloadPath;
-            filename = filename ?? Path.GetTempFileName();
-            var fileInfo = new FileInfo(Path.Combine(downloadPath, filename));
+            filename = filename ?? Path.GetFileName(uri.AbsolutePath);
+            var fullpath = Path.Combine(downloadPath, filename);
+            var fileInfo = new FileInfo(fullpath);
+            if (fileInfo.Exists && useCache)
+            {
+                // If we already have the file in our cache, return that instead.
+                return fileInfo.FullName;
+            }
+
             var response = await this.httpClient.GetAsync(uri);
             response.EnsureSuccessStatusCode();
             await using var ms = await response.Content.ReadAsStreamAsync();

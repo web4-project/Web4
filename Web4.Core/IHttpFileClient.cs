@@ -10,7 +10,7 @@ namespace Web4.Core
     {
         Task<string> UploadFile(string filePath, MultipartFormDataContent? dataForm = default);
 
-        Task<string> DownloadFile(Uri uri, string? downloadPath, string? filename);
+        Task<string> DownloadFile(Uri uri, string? downloadPath, string? filename, bool useCache = true);
 
         string DefaultDownloadPath { get; }
     }

@@ -25,7 +25,7 @@ namespace Web4.Core
         /// <param name="options"><see cref="ImageTranscodeOptions"/>.</param>
         /// <param name="cancellationToken"><see cref="CancellationToken"/>.</param>
         /// <returns>String Path location to the image.</returns>
-        Task<string> TranscodeImageAsync(string filepath, ImageTranscodeOptions options, CancellationToken? cancellationToken = default);
+        Task<FileResult> TranscodeImageAsync(string filepath, ImageTranscodeOptions options, CancellationToken? cancellationToken = default);
 
         /// <summary>
         /// Transcodes an image.
@@ -34,7 +34,7 @@ namespace Web4.Core
         /// <param name="options"><see cref="ImageTranscodeOptions"/>.</param>
         /// <param name="cancellationToken"><see cref="CancellationToken"/>.</param>
         /// <returns>String Path location to the image.</returns>
-        Task<string> TranscodeImageAsync(Uri uri, ImageTranscodeOptions options, CancellationToken? cancellationToken = default);
+        Task<FileResult> TranscodeImageAsync(Uri uri, ImageTranscodeOptions options, CancellationToken? cancellationToken = default);
 
         string DefaultDownloadPath { get; }
 
