@@ -12,6 +12,16 @@ namespace Web4.Core
     public interface IImageProxyHandler
     {
         /// <summary>
+        /// Gets the default download path.
+        /// </summary>
+        string DefaultDownloadPath { get; }
+
+        /// <summary>
+        /// Gets the default cache path.
+        /// </summary>
+        string DefaultCachePath { get; }
+
+        /// <summary>
         /// Invoke Image Proxy for a given image.
         /// </summary>
         /// <param name="context"><see cref="HttpContent"/>.</param>
@@ -35,9 +45,5 @@ namespace Web4.Core
         /// <param name="cancellationToken"><see cref="CancellationToken"/>.</param>
         /// <returns>String Path location to the image.</returns>
         Task<FileResult> TranscodeImageAsync(Uri uri, ImageTranscodeOptions options, CancellationToken? cancellationToken = default);
-
-        string DefaultDownloadPath { get; }
-
-        string DefaultCachePath { get; }
     }
 }

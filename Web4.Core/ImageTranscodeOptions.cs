@@ -51,7 +51,7 @@ namespace Web4.Core
                 throw new ArgumentException("ImageFormat must not be Unknown");
             }
 
-            return $"format={this.Format}&width={this.Width}&height={this.Height}&scaledownby={this.ScaleDownBy}&framespersecond={this.FramesPerSecond}";
+            return $"format={this.Format}&width={this.Width}&height={this.Height}&scaledownby={this.ScaleDownBy}&framespersecond={this.FramesPerSecond}&usecache={this.UseCache}";
         }
 
         public static ImageTranscodeOptions FromQueryString(IQueryCollection queryCollection)
