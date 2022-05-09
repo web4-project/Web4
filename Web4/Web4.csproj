@@ -19,5 +19,8 @@
 	  <ProjectReference Include="..\Web4.ImageMagick\Web4.ImageMagick.csproj" />
 	  <ProjectReference Include="..\Web4.ImageSharp\Web4.ImageSharp.csproj" />
 	  <ProjectReference Include="..\Web4.Index\Web4.Index.csproj" />
+	  <ProjectReference Include="..\Web4.FFMpeg\Web4.FFMpeg.csproj">
+	    <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+	  </ProjectReference>
 	</ItemGroup>
 </Project>
