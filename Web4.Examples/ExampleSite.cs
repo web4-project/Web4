@@ -40,6 +40,11 @@ namespace Web4.Index
         public string Name => "Web4 Examples";
 
         /// <inheritdoc/>
-        public IReadOnlyList<IPage> Pages => new List<IPage>() { new IndexPage(this.templateRenderer) };
+        public IReadOnlyList<IPage> Pages => new List<IPage>()
+        {
+            new IndexPage(this.templateRenderer),
+            new ImagePage(this.templateRenderer),
+            new ImageUploadPage(this.templateRenderer),
+        };
     }
 }

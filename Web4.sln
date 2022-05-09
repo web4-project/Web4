@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web4.ImageSharp", "Web4.Ima
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web4.FFMpeg", "Web4.FFMpeg\Web4.FFMpeg.csproj", "{84BEB4FF-6616-44FB-AF75-90E192D71AD1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sites", "Sites", "{CC92151C-10ED-4E97-AC8A-D1A67A6AED39}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,8 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{746DAF34-1931-45A3-B22F-37A6CDA45150} = {9F103083-2DA1-4EF7-8C50-FDBC4C909EAD}
+		{95EA644B-35BF-419D-A40E-E373CFBA7358} = {CC92151C-10ED-4E97-AC8A-D1A67A6AED39}
+		{20F101E0-99EE-4FE9-9A36-EB7DFBB6FBA7} = {CC92151C-10ED-4E97-AC8A-D1A67A6AED39}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E7B62079-B259-4950-A1D1-2E579358E0FC}

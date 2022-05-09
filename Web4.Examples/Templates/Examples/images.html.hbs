@@ -1,0 +1,18 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 2.0//EN">
+<html>
+<head>
+    <title>Web4 - Image Debug</title>
+</head>
+<body>
+    <center><h1><b>Web4 Image Debug</b></h1></center>
+    <hr>
+    <form method="post" enctype="multipart/form-data" action="/examples/images">
+        <input type="file" id="imgfile" name="filename">
+        <input type="submit">
+    </form>
+    {{#if HasImage}}
+    <p>{{ImageUrl}}</p>
+    <img src="/proxy/image/{{{ImageUrl}}}" />
+    {{/if}}
+</body>
+</html>

@@ -5,10 +5,10 @@
 using System.Text;
 using Web4;
 using Web4.Core;
+using Web4.FFMpeg;
 using Web4.ImageMagick;
 using Web4.ImageSharp;
 using Web4.Index;
-using Web4.FFMpeg;
 
 // In order for encodings to work when writing out HTML for some providers
 // Like Shift-JIS, we need to register the encoding handler.
